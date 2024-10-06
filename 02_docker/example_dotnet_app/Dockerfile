@@ -9,6 +9,8 @@ RUN dotnet restore
 RUN dotnet publish -c example_dotnet_app -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Create a volume at container startup and mount it to /App directory
+VOLUME [ "/App" ]
 WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "example_dotnet_app.dll"]
