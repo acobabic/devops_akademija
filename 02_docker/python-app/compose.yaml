@@ -1,0 +1,15 @@
+services:
+  python-rp-nginx:
+    image: ababic89/py-rp-nginx:v0.1
+    container_name: python-rp-nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - python-app01
+      - python-app02
+  python-app01:
+    image: ababic89/python-app:v0.3
+    container_name: python-app01
+  python-app02:
+    image: ababic89/python-app:v0.3
+    container_name: python-app02
