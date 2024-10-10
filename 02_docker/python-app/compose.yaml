@@ -4,6 +4,7 @@ services:
     container_name: python-rp-nginx
     ports:
       - "443:443"
+      - "80:80"
     depends_on:
       - python-app01
       - python-app02
