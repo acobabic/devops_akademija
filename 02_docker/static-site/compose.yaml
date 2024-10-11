@@ -20,7 +20,15 @@ services:
     container_name: app02
     networks:
       - backend-network
-
+  db:
+    image: postgres:latest
+    container_name: db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+volumes:
+  pgdata:
 networks:
   frontend-network:
     driver: bridge
