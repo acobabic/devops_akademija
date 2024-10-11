@@ -27,6 +27,8 @@ services:
       - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - backend-network
 volumes:
   pgdata:
 networks:
