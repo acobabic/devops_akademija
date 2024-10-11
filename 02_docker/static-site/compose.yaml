@@ -1,0 +1,28 @@
+services:
+  nginx:
+    image: ababic89/app-nginx-rp:v0.5
+    container_name: nginx-reverse-proxy
+    ports:
+      - "443:443"
+    networks:
+      - frontend-network
+      - backend-network
+    depends_on:
+      - app01
+      - app02
+  app01:
+    image: ababic89/app01:v0.1
+    container_name: app01
+    networks:
+      - backend-network
+  app02:
+    image: ababic89/app02:v0.1
+    container_name: app02
+    networks:
+      - backend-network
+
+networks:
+  frontend-network:
+    driver: bridge
+  backend-network:
+    driver: bridge
