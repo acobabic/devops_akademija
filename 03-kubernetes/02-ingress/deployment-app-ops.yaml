@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-k8s-app-ops
+  namespace: devops
+  labels:
+    app: app-ops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-ops
+  template:
+    metadata:
+      labels:
+        app: app-ops
+    spec:
+      containers:
+      - name: app-ops
+        image: ababic89/k8s-app-ops:v0.1
+        ports:
+        - containerPort: 80
+          name: http-app-ops
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-k8s-app-ops-service
+  namespace: devops
+spec:
+  selector:
+    app: app-ops
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: http-app-ops
